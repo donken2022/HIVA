@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Solutions for Growth and Stability</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Matching the dark, professional green palette
+                        'brand-dark': '#0A2825', // Deep Teal/Forest Green
+                        'brand-secondary': '#163A32', // Slightly lighter dark green for accents
+                        'brand-accent': '#C0D9C7', // Subdued, light green for key text/elements
+                        'brand-light-bg': '#F8F8F8', // Very light gray background
+                        'brand-text-light': '#D1D5DB', 
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for the vertical dividers/sidebars seen in the image */
+        .vertical-line-container {
+            position: relative;
+            z-index: 10;
+        }
+        .vertical-line {
+            width: 3px;
+            background-color: #D1D5DB; /* Light gray line */
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+        .hero-bg {
+            background-image: url('https://placehold.co/1600x600/0A2825/163A32');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-brand-light-bg text-gray-800 font-sans">
+
+    <!-- 1. Header and Navigation (Deep Dark Green) -->
+    <header class="bg-brand-dark shadow-xl sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- Simple Logo: Light 'A' shape -->
+                <svg class="w-8 h-8 text-brand-accent transform rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 2v20M4 12h16"></path></svg>
+                <a href="#" class="text-2xl font-extrabold text-white tracking-widest">AeroConsult</a>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#solutions" class="text-brand-text-light hover:text-brand-accent transition duration-200">Solutions</a>
+                <a href="#team" class="text-brand-text-light hover:text-brand-accent transition duration-200">Our Team</a>
+                <a href="#insights" class="text-brand-text-light hover:text-brand-accent transition duration-200">Insights</a>
+                <a href="#clients" class="text-brand-text-light hover:text-brand-accent transition duration-200">Clients</a>
+                <a href="#contact" class="text-brand-text-light hover:text-brand-accent transition duration-200">Contact</a>
+            </div>
+            <a href="#contact" class="hidden md:block bg-brand-accent text-brand-dark font-bold py-2 px-6 rounded-full text-sm hover:bg-white transition duration-300 shadow-lg">
+                Get Started
+            </a>
+        </nav>
+    </header>
+
+    <!-- 2. Hero Section (Image and Text Overlay with Vertical Sidebar) -->
+    <section class="relative bg-brand-dark pt-32 pb-48 md:pt-48 md:pb-64 overflow-hidden">
+        <div class="absolute inset-0 hero-bg opacity-90"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex">
+                <!-- Vertical Sidebar (Left Column) -->
+                <div class="hidden md:block w-1/4 pr-16 text-xs vertical-line-container">
+                    <div class="vertical-line h-full w-px bg-brand-accent"></div>
+                    <div class="pl-6 pt-24 space-y-4 text-brand-accent font-semibold tracking-widest uppercase">
+                        <p class="mb-8">Driving Growth</p>
+                        <p>Global Reach</p>
+                        <p>Execution Focus</p>
+                    </div>
+                </div>
+
+                <!-- Main Hero Content (Right Column) -->
+                <div class="w-full md:w-3/4 text-center md:text-left">
+                    <h1 class="text-4xl md:text-6xl font-black text-white leading-tight tracking-tighter mb-4">
+                        Business Solutions <br> for <span class="text-brand-accent">Growth and Stability</span>
+                    </h1>
+                    <p class="text-xl text-brand-text-light mb-12 max-w-4xl mx-auto md:mx-0">
+                        Driving exponential value through strategic advisory, digital transformation, and risk mitigation.
+                    </p>
+                    
+                    <!-- Search/CTA Bar (matches visual placement) -->
+                    <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 max-w-2xl mt-8">
+                        <input type="text" placeholder="What challenge can we solve for you today?" class="w-full p-3 border-none focus:ring-0 rounded-lg text-brand-dark shadow-inner" aria-label="Search for solutions">
+                        <button class="w-full md:w-auto bg-brand-secondary text-white font-bold py-3 px-8 rounded-lg hover:bg-brand-dark transition duration-300 shadow-md">
+                            Inquire Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Core Services/Pillars (Raised Cards) -->
+    <section id="solutions" class="py-20 bg-brand-light-bg -mt-24 md:-mt-32">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pillar 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-brand-secondary transform transition duration-300 hover:shadow-2xl">
+                    <svg class="w-10 h-10 text-brand-secondary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1v-3m0 0l3 3m-3-3l-3 3M9 14h6m-6 4h6"></path></svg>
+                    <h3 class="text-xl font-bold mb-3 text-brand-dark">M&A Advisory</h3>
+                    <p class="text-gray-600 text-sm">Full lifecycle support from target identification to post-merger integration for maximum synergy capture.</p>
+                </div>
+                <!-- Pillar 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-brand-secondary transform transition duration-300 hover:shadow-2xl">
+                    <svg class="w-10 h-10 text-brand-secondary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    <h3 class="text-xl font-bold mb-3 text-brand-dark">Digital Transformation</h3>
+                    <p class="text-gray-600 text-sm">Implementing cloud-native solutions and AI-driven processes to create future-proof operational models.</p>
+                </div>
+                <!-- Pillar 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-brand-secondary transform transition duration-300 hover:shadow-2xl">
+                    <svg class="w-10 h-10 text-brand-secondary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h3 class="text-xl font-bold mb-3 text-brand-dark">Operational Excellence</h3>
+                    <p class="text-gray-600 text-sm">Optimizing supply chains, improving resource utilization, and driving sustained cost efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Solutions for Success (Content Block with Vertical Sidebar) -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex">
+                <!-- Vertical Sidebar (Left Column) -->
+                <div class="hidden lg:block w-1/4 pr-16 text-sm vertical-line-container">
+                    <div class="vertical-line h-full w-px bg-gray-300"></div>
+                    <div class="pl-6 pt-2 space-y-2 text-gray-500 font-semibold tracking-widest uppercase text-xs">
+                        <p>Consulting</p>
+                        <p>Strategy</p>
+                        <p>Execution</p>
+                    </div>
+                </div>
+
+                <!-- Main Content (Right Column) -->
+                <div class="w-full lg:w-3/4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Right: Text Content -->
+                    <div class="order-1 lg:order-2">
+                        <p class="text-brand-secondary uppercase tracking-widest text-sm font-semibold mb-3">Our Core Philosophy</p>
+                        <h2 class="text-4xl font-extrabold text-brand-dark mb-6">Solutions for Success</h2>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            We partner with global leaders to navigate complexity and deliver tangible, lasting results. Our structured approach ensures that strategy translates directly into operational action, yielding measurable growth across all verticals.
+                        </p>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-secondary mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Dedicated partner engagement from day one.
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-secondary mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Proprietary data models and predictive analytics.
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-secondary mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Commitment to measurable, long-term impact.
+                            </li>
+                        </ul>
+                        <button class="mt-8 bg-brand-secondary text-white font-bold py-3 px-8 rounded-full hover:bg-brand-dark transition duration-300 shadow-lg">
+                            Read Our Case Studies
+                        </button>
+                    </div>
+                     <!-- Left: Image -->
+                    <div class="order-2 lg:order-1 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://placehold.co/800x500/F1F5F9/163A32?text=Team+Consultation+Image" alt="Two business people shaking hands." class="w-full h-auto object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Team Section - Leadership (Dark Background) -->
+    <section id="team" class="bg-brand-dark py-20 text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-extrabold mb-12 text-brand-accent text-center">Our Leadership & Team</h2>
+            
+            <!-- "01" Value Driven Card - matches image layout -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center bg-brand-secondary p-8 rounded-xl shadow-2xl">
+                <!-- Card 1: Text Block -->
+                <div class="col-span-1 text-left">
+                    <span class="text-6xl font-black text-brand-accent block mb-2">01</span>
+                    <h3 class="text-3xl font-extrabold text-white mb-2">Value Driven</h3>
+                    <p class="text-brand-text-light text-sm">Expertise across three continents and twenty industries.</p>
+                </div>
+
+                <!-- Card 2: Image -->
+                <div class="col-span-1 rounded-xl overflow-hidden shadow-xl h-64">
+                    <img src="https://placehold.co/600x400/163A32/C0D9C7?text=Team+Working" alt="Team members discussing strategy at a table." class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Card 3: Additional Image (to match the three-column look) -->
+                <div class="col-span-1 rounded-xl overflow-hidden shadow-xl h-64 hidden md:block">
+                     <img src="https://placehold.co/600x400/163A32/C0D9C7?text=Executive+Meeting" alt="Executive meeting in a modern office." class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 6. Data/Chart Section -->
+    <section id="insights" class="py-20 bg-brand-light-bg">
+        <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Left: Bar Chart Placeholder -->
+            <div class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-brand-secondary">
+                <h3 class="text-2xl font-bold text-brand-dark mb-4">Performance Metrics</h3>
+                <!-- Simple Chart using a Placeholder -->
+                <img src="https://placehold.co/800x400/F1F5F9/0A2825?text=Bar+Chart+Placeholder" alt="Placeholder for a bar chart showing quarterly performance." class="w-full h-auto rounded-lg">
+            </div>
+
+            <!-- Right: Text and CTA -->
+            <div class="text-right">
+                <h2 class="text-4xl font-extrabold text-brand-dark mb-4 tracking-tighter">
+                    Best-in-Class Strategy <br>Delivery Q3 2023
+                </h2>
+                <p class="text-gray-600 mb-8 max-w-md ml-auto">
+                    We consistently outperform benchmarks in client satisfaction and implementation speed, leading to quicker ROI realization for our partners.
+                </p>
+                <a href="#solutions" class="inline-block bg-brand-accent text-brand-dark font-bold py-3 px-8 rounded-full hover:bg-brand-secondary hover:text-white transition duration-300 shadow-md">
+                    View Full Report
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7 & 8. Skyscraper Image & Contact Form -->
+    <section class="grid grid-cols-1 lg:grid-cols-2">
+        <!-- Left: Skyscraper Image -->
+        <div class="h-96 lg:h-auto bg-cover bg-center" style="background-image: url('https://placehold.co/800x900/475569/ffffff?text=Modern+Skyscraper+Exterior')">
+            <!-- Image is the background -->
+        </div>
+
+        <!-- Right: Contact Form (Light Background) -->
+        <div id="contact" class="bg-brand-light-bg p-12 md:p-20 flex flex-col justify-center">
+            <h2 class="text-4xl font-extrabold text-brand-dark mb-6">Ready to Start?</h2>
+            <p class="text-gray-600 mb-8">
+                Tell us about your organization's biggest challenge. We'll connect you with the right expertise.
+            </p>
+            <form>
+                <div class="mb-4">
+                    <label for="org" class="block text-brand-dark font-medium mb-2">Organization Name</label>
+                    <input type="text" id="org" class="w-full p-3 rounded-lg border border-gray-300 focus:border-brand-accent focus:ring focus:ring-brand-accent focus:ring-opacity-50">
+                </div>
+                <div class="mb-4">
+                    <label for="query" class="block text-brand-dark font-medium mb-2">Your Primary Query</label>
+                    <textarea id="query" rows="4" class="w-full p-3 rounded-lg border border-gray-300 focus:border-brand-accent focus:ring focus:ring-brand-accent focus:ring-opacity-50"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-brand-dark text-white font-bold py-3 rounded-lg hover:bg-brand-secondary transition duration-300 shadow-lg">
+                    Send Inquiry
+                </button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- 9. Dedicated Team Section (Portraits - matches image layout) -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-extrabold text-brand-dark mb-12">Our Dedicated Team</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                
+                <!-- Team Card 1 -->
+                <div class="w-40 text-center">
+                    <div class="w-full h-40 mb-3 rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                        <img src="https://placehold.co/160x160/D1D5DB/0A2825?text=TS" alt="Team Speaker" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-bold text-sm text-brand-dark">Thomas Smith</p>
+                    <p class="text-xs text-gray-500">Project Lead</p>
+                </div>
+                
+                <!-- Team Card 2 -->
+                <div class="w-40 text-center">
+                    <div class="w-full h-40 mb-3 rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                        <img src="https://placehold.co/160x160/D1D5DB/0A2825?text=MR" alt="Team Member" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-bold text-sm text-brand-dark">Maria Rossi</p>
+                    <p class="text-xs text-gray-500">Analytics</p>
+                </div>
+                
+                <!-- Team Card 3 -->
+                <div class="w-40 text-center">
+                    <div class="w-full h-40 mb-3 rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                        <img src="https://placehold.co/160x160/D1D5DB/0A2825?text=JD" alt="Team Member" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-bold text-sm text-brand-dark">John Davis</p>
+                    <p class="text-xs text-gray-500">Consultant</p>
+                </div>
+                
+                <!-- Team Card 4 -->
+                <div class="w-40 text-center">
+                    <div class="w-full h-40 mb-3 rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                        <img src="https://placehold.co/160x160/D1D5DB/0A2825?text=LS" alt="Team Member" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-bold text-sm text-brand-dark">Laura Stone</p>
+                    <p class="text-xs text-gray-500">Strategy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Collaborative Image and CTA Banner (Dark Background) -->
+    <section class="bg-brand-dark py-20">
+        <div class="container mx-auto px-6">
+            <!-- Collaboration Image (similar look to the image) -->
+            <div class="rounded-xl overflow-hidden mb-12 shadow-3xl">
+                <img src="https://placehold.co/1200x500/163A32/C0D9C7?text=Collaboration+Session" alt="Consultants working together on a desk." class="w-full h-auto object-cover">
+            </div>
+
+            <!-- CTA Text Block -->
+            <div class="bg-brand-secondary p-10 rounded-xl text-white shadow-2xl text-center">
+                <h3 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">
+                    What are your goals for the next five years?
+                </h3>
+                <p class="text-xl text-brand-text-light mb-8">
+                    Let us design the strategy and execute the plan to get you there.
+                </p>
+                <a href="#contact" class="inline-block bg-brand-accent text-brand-dark font-bold py-3 px-10 rounded-full text-lg hover:bg-white transition duration-300">
+                    Schedule an Executive Briefing
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Valued Clients Section (Logos) -->
+    <section id="clients" class="py-16 bg-brand-light-bg">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-bold text-gray-500 uppercase tracking-wider mb-10">Valued Clients</h2>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                <!-- Logos match the grayed-out look of the image -->
+                <div class="text-6xl font-black text-gray-300 p-4 rounded-lg">?</div>
+                <div class="text-6xl font-black text-gray-300 p-4 rounded-lg">S</div>
+                <div class="text-6xl font-black text-gray-300 p-4 rounded-lg">B</div>
+                <div class="text-4xl font-bold text-gray-300 p-4 rounded-lg">Bridgestone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. Consultant Quote/Image Block -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Left: Image -->
+            <div class="rounded-xl overflow-hidden shadow-2xl">
+                <img src="https://placehold.co/800x500/0A2825/C0D9C7?text=Thoughtful+Consultant" alt="Consultant looking at a monitor." class="w-full h-auto object-cover">
+            </div>
+            <!-- Right: Text Content -->
+            <div>
+                <h3 class="text-4xl font-extrabold text-brand-dark mb-4">Need Help? We've Got You.</h3>
+                <p class="text-gray-600 mb-6 italic border-l-4 border-brand-secondary pl-4">
+                    "The true measure of a solution is not in its complexity, but in its ability to simplify the client's future. That's the impact we strive for every day."
+                </p>
+                <p class="text-brand-secondary font-bold">— David Chen, Principal Consultant</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. Footer (Deep Dark Green) -->
+    <footer class="bg-brand-dark text-brand-text-light py-12">
+        <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-8 border-b border-brand-secondary pb-8 mb-8">
+            <!-- Column 1: Logo/Title -->
+            <div class="col-span-2 md:col-span-1">
+                <div class="flex items-center space-x-2 mb-3">
+                    <svg class="w-6 h-6 text-brand-accent transform rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 2v20M4 12h16"></path></svg>
+                    <span class="text-xl font-extrabold text-white">AeroConsult</span>
+                </div>
+                <p class="text-sm">Driving growth through insight and execution.</p>
+            </div>
+
+            <!-- Column 2: Solutions -->
+            <div>
+                <h4 class="text-white font-bold mb-4">Solutions</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-brand-accent transition">Digital Strategy</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition">Risk Management</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition">Operational Models</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Company -->
+            <div>
+                <h4 class="text-white font-bold mb-4">Company</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-brand-accent transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition">Our Team</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition">Careers</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Resources -->
+            <div>
+                <h4 class="text-white font-bold mb-4">Resources</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-brand-accent transition">Insights</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition">Case Studies</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition">Client Portal</a></li>
+                </ul>
+            </div>
+            
+             <!-- Column 5: Contact -->
+            <div>
+                <h4 class="text-white font-bold mb-4">Contact</h4>
+                <p class="text-sm">45 Global St, Suite 100</p>
+                <p class="text-sm">London, UK</p>
+                <p class="text-sm mt-3">info@aeroconsult.com</p>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 text-center text-sm">
+            &copy; 2024 AeroConsult. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

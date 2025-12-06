@@ -3,382 +3,576 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIVA Energy Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>HIVA Groupe SA - Corporate Multi-Industry Solutions</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        hiva: {
+                            blue: '#00008B', // Slate 600
+                            gold: '#ca8a04', // Yellow 600
+                            light: '#f8fafc',
+                            accent: '#3b82f6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f9fc;
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
+        
+        /* Animation classes for page transitions */
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .hidden-section { display: none; }
+        
+        /* Slider Styles */
+        .slide {
+            transition: opacity 1s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 0;
         }
-        .page-section {
-            display: none;
-        }
-        .page-section.active {
-            display: block;
-        }
+        .slide.active { opacity: 1; z-index: 10; }
+        .slide-content { z-index: 20; }
+        
+        /* Overlay for images to ensure text readability */
+        .overlay { background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.7)); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
-    <!-- Main container -->
-    <div class="min-h-screen flex flex-col">
+<body class="bg-gray-50 text-slate-800 flex flex-col min-h-screen">
 
-        <!-- Header and Navigation -->
-        <header class="bg-sky-500 shadow-lg sticky top-0 z-50">
-            <nav class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center space-x-4">
-                    <!-- Placeholder Logo -->
-                    <div class="bg-blue-600 w-20 h-20 rounded-full flex items-center justify-center text-white text-xl font-bold"><img src="hivalogo.png"></div>
-                    <a href="#" class="text-2xl font-bold text-white">Your Energy solutions</a>
+    <!-- Navigation -->
+    <header class="bg-hiva-blue text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="router('home')">
+                <div class="w-20 h-20 bg-hiva-blue rounded flex items-center justify-center font-bold text-hiva-blue text-xl"><img src= "hivalogo.png"></div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-heading font-bold tracking-wider leading-none">HIVA GROUPE SA</span>
+                    <span class="text-xm text-white-900 tracking-widest leading-none">Haiti Investment Vision and Action</span>
                 </div>
-                <div class="mt-4 md:mt-0 flex space-x-6">
-                    <a href="#home" data-page="home" class="nav-link text-white hover:text-blue-600 transition-colors duration-300 relative">
-                        Home
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300"></span>
-                    </a>
-                    <a href="#generators" data-page="generators" class="nav-link text-white hover:text-blue-600 transition-colors duration-300 relative">
-                        Generators
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300"></span>
-                    </a>
-                    <a href="#solar" data-page="solar" class="nav-link text-white hover:text-blue-600 transition-colors duration-300 relative">
-                        Solar Panels
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300"></span>
-                    </a>
-                    <a href="#contact" data-page="contact" class="nav-link text-white hover:text-blue-600 transition-colors duration-300 relative">
-                        Contact Us
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300"></span>
-                    </a>
-                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" onclick="router('home')" class="nav-link hover:text-hiva-gold transition-colors font-semibold" id="nav-home">Home</a>
+                <a href="#" onclick="router('energy')" class="nav-link hover:text-hiva-gold transition-colors" id="nav-energy">Energy</a>
+                <a href="#" onclick="router('hotel')" class="nav-link hover:text-hiva-gold transition-colors" id="nav-hotel">Hospitality</a>
+                <a href="#" onclick="router('trucks')" class="nav-link hover:text-hiva-gold transition-colors" id="nav-trucks">Auto Parts</a>
+                <a href="#" onclick="router('contact')" class="px-4 py-2 bg-hiva-gold text-hiva-blue font-bold rounded hover:bg-yellow-500 transition">Contact</a>
             </nav>
-        </header>
 
-        <!-- Main Content Area -->
-        <main class="flex-grow">
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
 
-            <!-- Home Section (Now includes Video + Carousel) -->
-            <section id="home" class="page-section active pt-24 pb-16 bg-blue-50">
-                <div class="container mx-auto px-6 text-center">
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-t border-slate-700">
+            <a href="#" onclick="router('home'); toggleMobileMenu()" class="block px-6 py-3 hover:bg-slate-700">Home</a>
+            <a href="#" onclick="router('energy'); toggleMobileMenu()" class="block px-6 py-3 hover:bg-slate-700">Energy Solutions</a>
+            <a href="#" onclick="router('hotel'); toggleMobileMenu()" class="block px-6 py-3 hover:bg-slate-700">Hospitality</a>
+            <a href="#" onclick="router('trucks'); toggleMobileMenu()" class="block px-6 py-3 hover:bg-slate-700">Truck Parts</a>
+            <a href="#" onclick="router('contact'); toggleMobileMenu()" class="block px-6 py-3 bg-hiva-gold text-hiva-blue font-bold">Contact Us</a>
+        </div>
+    </header>
 
-                    <!-- Video Section -->
-                    <div class="mb-16">
-                        <h2 class="text-4xl font-extrabold text-gray-900 mb-6">See Our Commitment in Action</h2>
-                        <div class="aspect-video w-full max-w-5xl mx-auto rounded-3xl shadow-2xl overflow-hidden border-4 border-blue-600">
-                            <!-- Placeholder YouTube Embed - Replace the src URL with your actual video link! -->
-                            <iframe 
-                                class="w-full h-full"
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+
+        <!-- ================= PAGE 1: HOME ================= -->
+        <section id="home" class="page-section">
+            <!-- Hero Slider -->
+            <div class="relative h-[600px] w-full overflow-hidden bg-gray-900">
+                
+                <!-- Slide 1: Energy -->
+                <div class="slide active">
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" class="w-full h-full object-cover" alt="Solar Energy">
+                    <div class="absolute inset-0 overlay flex items-center justify-center text-center">
+                        <div class="container px-6">
+                            <h2 class="text-4xl md:text-6xl font-heading font-bold text-white mb-4 drop-shadow-lg fade-in">Powering the Future</h2>
+                            <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto drop-shadow-md">Leading solutions in Solar Energy and Industrial Generators.</p>
+                            <button onclick="router('energy')" class="px-8 py-3 bg-hiva-gold text-hiva-blue font-bold text-lg rounded hover:bg-yellow-500 transition shadow-lg">Explore Energy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Hotel -->
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" class="w-full h-full object-cover" alt="Luxury Hotel">
+                    <div class="absolute inset-0 overlay flex items-center justify-center text-center">
+                        <div class="container px-6">
+                            <h2 class="text-4xl md:text-6xl font-heading font-bold text-white mb-4 drop-shadow-lg">Excellence in Hospitality</h2>
+                            <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto drop-shadow-md">Providing world-class comfort and service in the hotel industry.</p>
+                            <button onclick="router('hotel')" class="px-8 py-3 bg-hiva-gold text-hiva-blue font-bold text-lg rounded hover:bg-yellow-500 transition shadow-lg">View Hotels</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Truck Parts -->
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1586015555751-63c6d2d09479?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" class="w-full h-full object-cover" alt="Truck Parts">
+                    <div class="absolute inset-0 overlay flex items-center justify-center text-center">
+                        <div class="container px-6">
+                            <h2 class="text-4xl md:text-6xl font-heading font-bold text-white mb-4 drop-shadow-lg">Reliability on the Road</h2>
+                            <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto drop-shadow-md">Premium new and used spare parts for heavy-duty trucks.</p>
+                            <button onclick="router('trucks')" class="px-8 py-3 bg-hiva-gold text-hiva-blue font-bold text-lg rounded hover:bg-yellow-500 transition shadow-lg">Find Parts</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Controls -->
+                <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-3 z-30">
+                    <button onclick="showSlide(0)" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition slide-dot active-dot"></button>
+                    <button onclick="showSlide(1)" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition slide-dot"></button>
+                    <button onclick="showSlide(2)" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition slide-dot"></button>
+                </div>
+            </div>
+
+
+
+
+            <!-- About Summary -->
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h2 class="text-3xl font-heading font-bold text-hiva-blue mb-6">About HIVA Groupe SA</h2>
+                <p class="text-gray-600 max-w-4xl mx-auto text-lg leading-relaxed">
+                    HIVA Groupe SA is a diversified conglomerate committed to driving growth through essential industries. 
+                    From sustainable energy solutions to luxury hospitality and keeping the supply chain moving with quality automotive parts, 
+                    we deliver excellence, integrity, and innovation in every sector we operate.
+                </p>
+
+                
+
+            </div>
+             <iframe 
+                                class="w-full h-[300px] lg:h-[450px] bg-gray-100"
                                 src="hivavid.mp4" 
                                 title="HIVA Energy Solutions Promotional Video" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                 allowfullscreen>
                             </iframe>
-                        </div>
-                    </div>
-                    <!-- End Video Section -->
 
-                    <!-- Carousel Section (Flex Container) -->
-                    <div class="flex flex-col lg:flex-row items-center justify-between pt-8">
-                        <!-- Carousel Text Section -->
-                        <div class="lg:w-1/2 mb-12 lg:mb-0 text-left transition-opacity duration-1000 ease-in-out" id="carousel-text-container">
-                            <!-- Text content will be dynamically updated by JS -->
-                        </div>
-                        <!-- Carousel Image Section -->
-                        <div class="lg:w-1/2">
-                            <div class="relative w-full h-auto rounded-3xl overflow-hidden shadow-2xl">
-                                <!-- Image content will be dynamically updated by JS -->
-                                <img src="" alt="Energy Solutions Carousel" class="w-full h-full object-cover transition-opacity duration-1000 ease-in-out" id="carousel-image">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Carousel Section -->
+         
 
-                </div>
-            </section>
 
-            <!-- Generators Section -->
-            <section id="generators" class="page-section pt-24 pb-16 bg-white hidden">
-                <div class="container mx-auto px-6 text-center">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Generators for Every Need</h2>
-                    <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
-                        From residential backup to industrial power, our generators are built for performance and durability.
-                    </p>
-                    <div class="flex flex-wrap justify-center -mx-5">
-                        <!-- Generator Card 1 -->
-                        <div class="w-full sm:w-1/2 lg:w-1/3 px-5 mb-10">
-                            <div class="bg-gray-100 p-8 rounded-2xl shadow-lg transform transition-transform hover:scale-105 duration-300 h-full flex flex-col items-center">
-                                <img src="gnerator.png" alt="Residential Generator" class="rounded-xl mb-6 w-full h-auto">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Residential Standby</h3>
-                                <p class="text-gray-600 mb-4 text-center flex-grow">
-                                    Automatic power backup for your home, ensuring comfort and security during outages.
-                                </p>
-                                <button class="mt-auto text-blue-600 font-bold hover:underline">Learn More →</button>
-                            </div>
-                        </div>
-                        <!-- Generator Card 2 -->
-                        <div class="w-full sm:w-1/2 lg:w-1/3 px-5 mb-10">
-                            <div class="bg-gray-100 p-8 rounded-2xl shadow-lg transform transition-transform hover:scale-105 duration-300 h-full flex flex-col items-center">
-                                <img src="comgen.png" alt="Commercial Generator" class="rounded-xl mb-6 w-full h-auto">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Commercial Solutions</h3>
-                                <p class="text-gray-600 mb-4 text-center flex-grow">
-                                    High-capacity generators designed for business continuity and critical operations.
-                                </p>
-                                <button class="mt-auto text-blue-600 font-bold hover:underline">Learn More →</button>
-                            </div>
-                        </div>
-                        <!-- Generator Card 3 -->
-                        <div class="w-full sm:w-1/2 lg:w-1/3 px-5 mb-10">
-                            <div class="bg-gray-100 p-8 rounded-2xl shadow-lg transform transition-transform hover:scale-105 duration-300 h-full flex flex-col items-center">
-                                <img src="induspow.png" alt="Industrial Generator" class="rounded-xl mb-6 w-full h-auto">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Industrial Power</h3>
-                                <p class="text-gray-600 mb-4 text-center flex-grow">
-                                    Robust and reliable power generation for large-scale industrial projects and sites.
-                                </p>
-                                <button class="mt-auto text-blue-600 font-bold hover:underline">Learn More →</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Solar Panels Section -->
-            <section id="solar" class="page-section pt-24 pb-16 bg-gray-100 hidden">
-                <div class="container mx-auto px-6 text-center">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Solar Energy for a Brighter Tomorrow</h2>
-                    <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
-                        Reduce your carbon footprint and save on energy costs with our professional solar panel installations.
-                    </p>
-                    <div class="flex flex-wrap justify-center -mx-5">
-                        <!-- Solar Benefit Card 1 -->
-                        <div class="w-full sm:w-1/2 px-5 mb-10">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg transform transition-transform hover:scale-105 duration-300 h-full flex flex-col items-center text-center">
-                                <svg class="w-16 h-16 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Cost Savings</h3>
-                                <p class="text-gray-600">
-                                    Drastically reduce your electricity bills by generating your own power from the sun.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Solar Benefit Card 2 -->
-                        <div class="w-full sm:w-1/2 px-5 mb-10">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg transform transition-transform hover:scale-105 duration-300 h-full flex flex-col items-center text-center">
-                                <svg class="w-16 h-16 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 01-9-9c0-5.523 4.477-10 10-10a9 9 0 019 9c0 5.523-4.477 10-10 10z"></path>
-                                </svg>
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Environmental Impact</h3>
-                                <p class="text-gray-600">
-                                    Contribute to a greener planet by using a clean, renewable energy source.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Solar Benefit Card 3 -->
-                        <div class="w-full sm:w-1/2 px-5 mb-10">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg transform transition-transform hover:scale-105 duration-300 h-full flex flex-col items-center text-center">
-                                <svg class="w-16 h-16 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.477 3-10S13.657 2 12 2 9 6.477 9 12s1.343 9 3 9z"></path>
-                                </svg>
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Increased Property Value</h3>
-                                <p class="text-gray-600">
-                                    Homes with solar installations are more attractive to buyers and have a higher market value.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Solar Benefit Card 4 -->
-                        <div class="w-full sm:w-1/2 px-5 mb-10">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg transform transition-transform hover:scale-105 duration-300 h-full flex flex-col items-center text-center">
-                                <svg class="w-16 h-16 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944c-3.134 0-6.104 1.547-7.942 4.148M14 19.948A9.006 9.006 0 0112 21a9.006 9.006 0 01-2-.052"></path>
-                                </svg>
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Reliable Service</h3>
-                                <p class="text-gray-600">
-                                    Our team of experts provides professional installation and ongoing maintenance.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Contact Us Section -->
-            <section id="contact" class="page-section pt-24 pb-16 bg-white hidden">
-                <div class="container mx-auto px-6 text-center">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
-                    <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
-                        We're ready to help you with your energy needs. Fill out the form below or contact us directly.
-                    </p>
-                    <div class="max-w-4xl mx-auto flex flex-col lg:flex-row gap-12 text-left">
-                        <!-- Contact Form -->
-                        <div class="w-full lg:w-1/2 bg-gray-100 p-10 rounded-2xl shadow-lg">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
-                            <form>
-                                <div class="mb-6">
-                                    <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
-                                    <input type="text" id="name" name="name" class="w-full p-4 rounded-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                </div>
-                                <div class="mb-6">
-                                    <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
-                                    <input type="email" id="email" name="email" class="w-full p-4 rounded-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                </div>
-                                <div class="mb-6">
-                                    <label for="message" class="block text-gray-700 font-bold mb-2">Message</label>
-                                    <textarea id="message" name="message" rows="5" class="w-full p-4 rounded-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                                </div>
-                                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-blue-700 transition-colors duration-300">
-                                    Submit
-                                </button>
-                            </form>
-                        </div>
-                        <!-- Contact Information -->
-                        <div class="w-full lg:w-1/2 bg-gray-100 p-10 rounded-2xl shadow-lg">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Information</h3>
-                            <div class="mb-6">
-                                <h4 class="text-lg font-bold text-gray-700">Address:</h4>
-                                <p class="text-gray-600">HIVA<br>Delmas, HAITI</p>
-                            </div>
-                            <div class="mb-6">
-                                <h4 class="text-lg font-bold text-gray-700">Phone:</h4>
-                                <p class="text-gray-600">(509) 36 51 7070</p>
-                            </div>
-                            <div class="mb-6">
-                                <h4 class="text-lg font-bold text-gray-700">Email:</h4>
-                                <p class="text-gray-600">info@hivasolutions.com</p>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-700">Follow Us:</h4>
-                                <div class="flex space-x-4 mt-2">
-                                    <!-- Social Media Icons (placeholders) -->
-                                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">
-                                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M8.29 20.25c-5.87 0-11.41-1.2-15.11-3.66a2.02 2.02 0 01-.73-.55c-2.31-2.3-3.64-5.22-3.64-8.29 0-3.87 2.1-7.23 5.4-8.87a2.02 2.02 0 011.66-.02c1.78.68 3.5 1.58 5.16 2.65a.5.5 0 00.73-.25c.34-.69.65-1.42.94-2.18.29-.76.53-1.52.73-2.28.2-.76.35-1.52.45-2.28a.5.5 0 00-.2-.69c-2.02-1.12-4.14-1.92-6.3-2.4a.5.5 0 00-.47.1c-2.9 2.1-4.75 5.56-4.75 9.4 0 3.84 1.85 7.2 4.75 9.4.1.08.2.14.3.18a.5.5 0 00.47-.1c.9-.65 1.76-1.38 2.58-2.19.82-.81 1.6-1.68 2.34-2.6a.5.5 0 00-.23-.74c-.7-.4-1.36-.88-2.02-1.4a.5.5 0 00-.4-.06c-.8.15-1.58.25-2.35.3-.77.05-1.54.08-2.3.08-1.5 0-3-.12-4.47-.35a.5.5 0 00-.54.34c-.26 1.35-.45 2.72-.56 4.08-.1.68-.18 1.36-.25 2.04a.5.5 0 00.2.69c.68.37 1.4.67 2.14.89.74.22 1.5.38 2.27.48.77.1 1.54.15 2.3.15 3.06 0 5.9-1.3 7.85-3.52a.5.5 0 00-.3-.87c-.8-.28-1.63-.5-2.47-.68a.5.5 0 00-.55.1c-.58.6-1.2.7-1.85.34a.5.5 0 00-.53.52c.2.8.4 1.6.6 2.4.2.8.4 1.6.6 2.4.2.8.4 1.6.6 2.4a.5.5 0 00.35.48c.8.18 1.63.28 2.48.3.85.02 1.7.02 2.55-.04.85-.06 1.7-.12 2.55-.2a.5.5 0 00.4-.64c-.3-1.6-1.02-3.1-2.18-4.48a.5.5 0 00-.55-.13z"/>
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">
-                                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M12 2C6.477 2 2 6.477 2 12c0 5.176 3.77 9.475 8.718 10.375V15.25H7.75v-3.25h2.968v-2.5c0-2.9 1.77-4.498 4.364-4.498 1.246 0 2.316.22 2.63.318v2.85h-1.693c-1.332 0-1.59.633-1.59 1.56v1.95h3.193l-.417 3.25h-2.776V22.375C18.23 21.475 22 17.176 22 12c0-5.523-4.477-10-10-10z"/>
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">
-                                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M16.98 2H7.02c-2.76 0-5.02 2.26-5.02 5.02v9.96c0 2.76 2.26 5.02 5.02 5.02h9.96c2.76 0 5.02-2.26 5.02-5.02V7.02c0-2.76-2.26-5.02-5.02-5.02zM12 16.5c-2.485 0-4.5-2.015-4.5-4.5S9.515 7.5 12 7.5s4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5zm4.846-9.177c-.504 0-.912-.41-.912-.912s.41-.912.912-.912.912.41.912.912-.41.912-.912.912z"/>
-                                        </svg>
-                                    </a>
+            <!-- Sectors Grid -->
+            <div class="bg-gray-100 py-16">
+                <div class="container mx-auto px-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Card 1 -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-300">
+                            <div class="h-48 bg-blue-900 relative">
+                                <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
+                                <div class="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent w-full">
+                                    <h3 class="text-white text-xl font-bold">Energy Division</h3>
                                 </div>
                             </div>
+                            <div class="p-6">
+                                <p class="text-gray-600 mb-4">Solar installation and industrial generator supply.</p>
+                                <button onclick="router('energy')" class="text-hiva-blue font-bold hover:text-hiva-gold flex items-center">Learn More <i class="fas fa-arrow-right ml-2"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-300">
+                            <div class="h-48 bg-blue-900 relative">
+                                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
+                                <div class="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent w-full">
+                                    <h3 class="text-white text-xl font-bold">Hospitality</h3>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-gray-600 mb-4">Premium hotels offering comfort and luxury.</p>
+                                <button onclick="router('hotel')" class="text-hiva-blue font-bold hover:text-hiva-gold flex items-center">Learn More <i class="fas fa-arrow-right ml-2"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-300">
+                            <div class="h-48 bg-blue-900 relative">
+                                <img src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
+                                <div class="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent w-full">
+                                    <h3 class="text-white text-xl font-bold">Auto Parts</h3>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-gray-600 mb-4">New and used spare parts for heavy trucks.</p>
+                                <button onclick="router('trucks')" class="text-hiva-blue font-bold hover:text-hiva-gold flex items-center">Learn More <i class="fas fa-arrow-right ml-2"></i></button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-        </main>
-
-        <!-- Footer -->
-        <footer class="bg-gray-900 text-white py-8">
-            <div class="container mx-auto px-6 text-center">
-                <p>&copy; 2025 HIVA Energy Solutions. All Rights Reserved.</p>
-                <div class="flex justify-center space-x-4 mt-4 text-sm">
-                    <a href="#" class="hover:underline">Privacy Policy</a>
-                    <a href="#" class="hover:underline">Terms of Service</a>
                 </div>
             </div>
-        </footer>
+        </section>
 
-    </div>
+        <!-- ================= PAGE 2: ENERGY ================= -->
+        <section id="energy" class="page-section hidden-section fade-in">
+            <div class="bg-hiva-blue text-white py-20 text-center">
+                <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4">Energy Solutions</h1>
+                <p class="text-xl text-gray-300">Powering your business with sustainable and reliable energy.</p>
+            </div>
+            
+            <div class="container mx-auto px-6 py-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-solar-panel text-3xl text-hiva-gold mr-4"></i>
+                            <h2 class="text-3xl font-bold text-hiva-blue">Solar Energy</h2>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            HIVA Groupe provides state-of-the-art photovoltaic solutions for industrial and commercial applications. 
+                            Our turnkey solar projects reduce operational costs and minimize carbon footprint. We handle everything from 
+                            feasibility studies to installation and maintenance.
+                        </p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Commercial Grid-Tie Systems</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Off-Grid Storage Solutions</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Solar Water Heating</li>
+                        </ul>
+                    </div>
+                    <div class="rounded-xl overflow-hidden shadow-2xl h-80">
+                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover">
+                    </div>
+                </div>
 
-    <!-- JavaScript for Page Navigation and Carousel -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center flex-row-reverse">
+                    <div class="order-1 lg:order-2">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-bolt text-3xl text-hiva-gold mr-4"></i>
+                            <h2 class="text-3xl font-bold text-hiva-blue">Generators & Backup</h2>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            We supply high-capacity industrial generators to ensure your operations never stop. 
+                            From prime power to standby backup, our range includes diesel and gas generators 
+                            fitted for the toughest environments.
+                        </p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> 10kVA to 2000kVA capacity</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> 24/7 Maintenance Service</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Genuine Spare Parts</li>
+                        </ul>
+                    </div>
+                    <div class="rounded-xl overflow-hidden shadow-2xl h-80 order-2 lg:order-1">
+                        <img src="https://images.unsplash.com/photo-1455385750035-7d727dfbbfa9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: HOTEL ================= -->
+        <section id="hotel" class="page-section hidden-section fade-in">
+            <div class="bg-slate-800 text-white py-20 text-center relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" class="absolute inset-0 w-full h-full object-cover opacity-20">
+                <div class="relative z-10">
+                    <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4">HIVA Hospitality</h1>
+                    <p class="text-xl text-gray-300">Refined living and exceptional service.</p>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-6 py-12">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-hiva-blue mb-4">Our Hotels</h2>
+                    <p class="text-gray-600">
+                        Whether for business or leisure, HIVA Groupe hotels offer a sanctuary of calm. 
+                        Modern amenities meets local culture to create unforgettable stays.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Feature 1 -->
+                    <div class="text-center p-6 border border-gray-200 rounded-lg hover:border-hiva-gold transition">
+                        <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 text-hiva-blue">
+                            <i class="fas fa-bed text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Luxury Rooms</h3>
+                        <p class="text-gray-500 text-sm">Spacious suites designed for maximum comfort with premium bedding.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="text-center p-6 border border-gray-200 rounded-lg hover:border-hiva-gold transition">
+                        <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 text-hiva-blue">
+                            <i class="fas fa-utensils text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Fine Dining</h3>
+                        <p class="text-gray-500 text-sm">On-site restaurants featuring international and local cuisine.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="text-center p-6 border border-gray-200 rounded-lg hover:border-hiva-gold transition">
+                        <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 text-hiva-blue">
+                            <i class="fas fa-wifi text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Business Ready</h3>
+                        <p class="text-gray-500 text-sm">High-speed fiber internet and conference rooms for professionals.</p>
+                    </div>
+                </div>
+
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="rounded-lg hover:opacity-90 transition cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="rounded-lg hover:opacity-90 transition cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1590490360182-c8729f7fd7fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="rounded-lg hover:opacity-90 transition cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="rounded-lg hover:opacity-90 transition cursor-pointer">
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4: AUTOMOTIVE / TRUCKS ================= -->
+        <section id="trucks" class="page-section hidden-section fade-in">
+             <div class="bg-gray-800 text-white py-20 text-center border-b-4 border-hiva-gold">
+                <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4">Spare Truck Parts</h1>
+                <p class="text-xl text-gray-300">Your trusted partner for Heavy Duty mechanics.</p>
+            </div>
+
+            <div class="container mx-auto px-6 py-12">
+                <div class="flex flex-wrap md:flex-nowrap gap-10">
+                    <!-- Left Sidebar Filters (Visual) -->
+                    <div class="w-full md:w-1/4">
+                        <div class="bg-white p-6 rounded shadow">
+                            <h3 class="font-bold text-lg mb-4 border-b pb-2">Categories</h3>
+                            <ul class="space-y-2">
+                                <li class="text-hiva-blue font-semibold cursor-pointer">Engine Parts</li>
+                                <li class="text-gray-600 hover:text-hiva-blue cursor-pointer">Brake Systems</li>
+                                <li class="text-gray-600 hover:text-hiva-blue cursor-pointer">Suspension</li>
+                                <li class="text-gray-600 hover:text-hiva-blue cursor-pointer">Electrical</li>
+                                <li class="text-gray-600 hover:text-hiva-blue cursor-pointer">Body & Chassis</li>
+                            </ul>
+                            
+                            <h3 class="font-bold text-lg mt-8 mb-4 border-b pb-2">Condition</h3>
+                            <div class="flex items-center space-x-2 mb-2">
+                                <div class="w-4 h-4 bg-hiva-gold rounded-full"></div>
+                                <span>Brand New (OEM)</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-4 bg-gray-400 rounded-full"></div>
+                                <span>Used (Certified)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-6 rounded shadow mt-6 border border-blue-100">
+                            <h4 class="font-bold text-hiva-blue mb-2">Need a specific part?</h4>
+                            <p class="text-sm text-gray-600 mb-4">Call our hotline for immediate inventory check.</p>
+                            <a href="tel:+123456789" class="block w-full text-center bg-hiva-blue text-white py-2 rounded font-bold hover:bg-blue-800"><i class="fas fa-phone mr-2"></i> Call Now</a>
+                        </div>
+                    </div>
+
+                    <!-- Right Content -->
+                    <div class="w-full md:w-3/4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- New Parts Box -->
+                            <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-hiva-blue">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 class="text-2xl font-bold text-hiva-blue">New Parts Sales</h3>
+                                    <span class="bg-blue-100 text-hiva-blue text-xs px-2 py-1 rounded uppercase font-bold">Guarantee Included</span>
+                                </div>
+                                <p class="text-gray-600 mb-6">
+                                    We are authorized distributors for major heavy truck manufacturers. 
+                                    We stock pistons, filters, turbos, and injectors direct from the factory.
+                                </p>
+                                <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded mb-4">
+                            </div>
+
+                            <!-- Used Parts Box -->
+                            <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-gray-500">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 class="text-2xl font-bold text-gray-800">Used Parts Sales</h3>
+                                    <span class="bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded uppercase font-bold">Tested & Verified</span>
+                                </div>
+                                <p class="text-gray-600 mb-6">
+                                    High-quality recycled parts from dismantled trucks. Engines, gearboxes, 
+                                    and differentials are thoroughly tested by our mechanics before sale.
+                                </p>
+                                <img src="https://images.unsplash.com/photo-1597762693822-29759eb53800?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded mb-4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section (Shared/Bottom) -->
+        <section id="contact" class="hidden-section fade-in page-section">
+             <div class="bg-hiva-blue text-white py-16 text-center">
+                <h1 class="text-4xl font-heading font-bold mb-4">Contact Us</h1>
+                <p class="max-w-2xl mx-auto text-gray-300">Ready to do business? Reach out to any of our departments.</p>
+            </div>
+            <div class="container mx-auto px-6 py-12">
+                <div class="bg-white rounded-lg shadow-xl p-8 max-w-4xl mx-auto">
+                    <form onsubmit="event.preventDefault(); alert('Message sent! Thank you for contacting HIVA Groupe SA.');" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Name</label>
+                                <input type="text" class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-hiva-gold" placeholder="Your Name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Email</label>
+                                <input type="email" class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-hiva-gold" placeholder="email@company.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Department</label>
+                            <select class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-hiva-gold">
+                                <option>General Inquiry</option>
+                                <option>Energy & Solar</option>
+                                <option>Hotel Reservations</option>
+                                <option>Truck Parts Sales</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Message</label>
+                            <textarea class="w-full border border-gray-300 p-3 rounded h-32 focus:outline-none focus:border-hiva-gold" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button class="w-full bg-hiva-gold text-hiva-blue font-bold py-4 rounded hover:bg-yellow-500 transition uppercase tracking-wide">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-hiva-gold rounded flex items-center justify-center font-bold text-hiva-blue">H</div>
+                        <span class="text-xl font-bold">HIVA GROUPE SA</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Innovating across industries for a better tomorrow.</p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-hiva-gold">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" onclick="router('home')" class="hover:text-white">Home</a></li>
+                        <li><a href="#" onclick="router('energy')" class="hover:text-white">Energy</a></li>
+                        <li><a href="#" onclick="router('hotel')" class="hover:text-white">Hospitality</a></li>
+                        <li><a href="#" onclick="router('trucks')" class="hover:text-white">Truck Parts</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-hiva-gold">Contact</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><i class="fas fa-map-marker-alt w-5"></i> Delmas, Haiti</li>
+                        <li><i class="fas fa-phone w-5"></i> (509) 36517070 / 41717070</li>
+                        <li><i class="fas fa-envelope w-5"></i> info@hivagroupe.com</li>
+                    </ul>
+                </div>
+
+                <!-- Social -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-hiva-gold">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center hover:bg-hiva-gold hover:text-hiva-blue transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center hover:bg-hiva-gold hover:text-hiva-blue transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center hover:bg-hiva-gold hover:text-hiva-blue transition"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-gray-500 text-sm">
+                &copy; 2023 HIVA Groupe SA. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Logic -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const pageSections = document.querySelectorAll('.page-section');
-
-            // Set the initial active page based on the URL hash, or default to 'home'
-            const initialPage = window.location.hash.substring(1) || 'home';
-            activatePage(initialPage);
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const pageId = e.currentTarget.dataset.page;
-                    activatePage(pageId);
-                });
+        // === Router Logic ===
+        function router(pageId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.add('hidden-section');
             });
 
-            function activatePage(pageId) {
-                // Hide all sections and remove active styling from links
-                pageSections.forEach(section => {
-                    section.classList.remove('active');
-                    section.classList.add('hidden');
-                });
-                navLinks.forEach(link => {
-                    link.classList.remove('text-blue-600');
-                    link.classList.add('text-gray-600');
-                    const span = link.querySelector('span');
-                    if (span) {
-                        span.classList.remove('scale-x-100');
-                    }
-                });
-
-                // Show the selected section and add active styling to the corresponding link
-                const activeSection = document.getElementById(pageId);
-                const activeLink = document.querySelector(`a[data-page="${pageId}"]`);
-
-                if (activeSection) {
-                    activeSection.classList.remove('hidden');
-                    activeSection.classList.add('active');
-                }
-                if (activeLink) {
-                    activeLink.classList.remove('text-gray-600');
-                    activeLink.classList.add('text-blue-600');
-                    const span = activeLink.querySelector('span');
-                    if (span) {
-                        span.classList.add('scale-x-100');
-                    }
-                }
+            // Show selected section
+            const target = document.getElementById(pageId);
+            if(target) {
+                target.classList.remove('hidden-section');
+                // Scroll to top
+                window.scrollTo(0,0);
             }
 
-            // Carousel Logic
-            const carouselData = [
-                {
-                    h1: `Powering a <span class="text-blue-600">Sustainable</span> Future`,
-                    p: `HIVA Energy Solutions provides reliable, clean energy options with our top-of-the-line generators and state-of-the-art solar panel systems.`,
-                    imgSrc: 'gnerator.png'
-                },
-                {
-                    h1: `Dependable <span class="text-blue-600">Generators</span> for Any Situation`,
-                    p: `Our range of generators ensures you're never without power, from residential backup to robust industrial solutions.`,
-                    imgSrc: `solar.png`
-                },
-                {
-                    h1: `Harnessing the <span class="text-blue-600">Sun's Power</span>`,
-                    p: `Reduce your carbon footprint and energy costs with our high-efficiency solar panels, professionally installed for maximum performance.`,
-                    imgSrc: `ressolarpanel.png`
-                }
-            ];
+            // Update Nav Active State (Optional visual cue)
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('text-hiva-gold'));
+            const activeLink = document.getElementById('nav-' + pageId);
+            if(activeLink) activeLink.classList.add('text-hiva-gold');
+        }
 
-            let currentSlide = 0;
-            const carouselTextContainer = document.getElementById('carousel-text-container');
-            const carouselImage = document.getElementById('carousel-image');
+        // === Mobile Menu ===
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
 
-            function updateCarousel() {
-                const data = carouselData[currentSlide];
-                carouselTextContainer.innerHTML = `
-                    <h1 class="text-5xl font-extrabold text-gray-900 leading-tight mb-4">${data.h1}</h1>
-                    <p class="text-lg text-gray-600 mb-8">${data.p}</p>
-                    <a href="#generators" data-page="generators" class="nav-link bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300">
-                        Explore Our Solutions
-                    </a>
-                `;
-                carouselImage.src = data.imgSrc;
+        // === Slider Logic ===
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slide-dot');
+        let slideInterval;
 
-                // Move to the next slide
-                currentSlide = (currentSlide + 1) % carouselData.length;
-            }
-            
-            // Initial call to show the first slide
-            updateCarousel();
-            
-            // Set an interval to change slides automatically
-            setInterval(updateCarousel, 5000); // Change slide every 5 seconds
+        function showSlide(index) {
+            // Reset state
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('bg-white', 'opacity-100'));
+            dots.forEach(dot => dot.classList.add('bg-white', 'opacity-50'));
+
+            // Set active
+            currentSlide = index;
+            if (currentSlide >= slides.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.remove('opacity-50');
+            dots[currentSlide].classList.add('opacity-100');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        // Start Auto Slider
+        function startSlider() {
+            slideInterval = setInterval(nextSlide, 5000); // Change every 5 seconds
+        }
+
+        // Pause on interaction (optional)
+        document.querySelector('.relative').addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        document.querySelector('.relative').addEventListener('mouseleave', () => {
+            startSlider();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            startSlider();
+            router('home'); // Default page
         });
     </script>
 </body>
